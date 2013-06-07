@@ -76,7 +76,7 @@ class Interface
   def letter_guess(letter, player)
     if @game.check_guess(letter)
       puts "We found #{letter}!"
-      @game.word.update_hidden_word(letter) #maybe 
+      @game.word.update_hidden_word(letter)
     else
       puts "Sorry, we didn't find #{letter}!"
     end
