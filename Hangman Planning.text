@@ -1,0 +1,55 @@
+Hangman Planning:
+
+  Domain Specific Language:
+    - Players
+      - Player names
+    - Game
+      - Turns
+      - Guess Letter
+      - Guess Word
+    - Word
+      - Word Dictionary 
+
+Hangman Process:
+  1) Select Number of players
+    if greater than 1 and less than 6 
+      proceed
+    else
+      inform not valid number and prompt for reentry
+
+  2) Fill in player names one at a time
+    if player enters a blank name -- 
+      prompt for re entry
+    if player name has been taken -- 
+      prompt for another name
+    assign name to player
+    when all players have been assigned a name, proceed
+
+Initiate Play
+  3) Generate random Hidden Word from Word Dictionary
+  4) Display Blanked Out Hidden Word to console
+  5) ID which players turn
+    start game with random player
+  6) Prompt player for input
+    capture (case insensitive) input
+    if ! 
+      prompt for Word Guess
+      if Word Guess matches Hidden Word
+        inform player that they have won
+        end game
+    if letter has already been guessed
+      inform user that that letter has already been guessed
+      prompt for re entry
+
+  7) if valid input -- check to see if Hidden Word contains letter
+    if Hidden Word contains Letter Guess 
+      inform player that Hidden Word contains their guess
+      fill in Hidden Word with all occurances of Letter Guess 
+    else
+      inform player that Hidden word doesn not contain their guess
+    display updated Blanked Out Hidden Word
+  8) Check if all letters have been displayed in Blanked Out Hidden Word
+    if all letters displayed
+      player wins
+    else 
+      next players turn
