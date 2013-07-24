@@ -1,12 +1,38 @@
 class Game
 
-  attr_accessor :word, :guessed_letters, :players
+  attr_accessor :word, :guessed_letters, :players, :player_count
 
   def initialize
     @players = []
     @guessed_letters = []
     @word = Word.new
+    @player_count = 0
+  end
 
+  def valid_player_count?(number)
+    if number.class == Fixnum && number >= 1 && number <= 5
+      return true
+    else
+      false
+    end
+  end
+
+  def player_name_present?(name)
+    if name != ""
+      true
+    else
+      false
+    end
+  end
+
+  def unique_player_name?(player_collection, name)
+    uniqueness = true
+    player_collection.each do |existing_player|
+      if name.downcase == existing_player.downcase
+        uniqueness = false
+      end
+    end
+    uniqueness
   end
 
   def shuffle_order
@@ -28,12 +54,4 @@ class Game
       false
     end
   end
-
-  # def check_word_guess(word)
-  #   if word == @word.generated_word
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
 end
