@@ -10,6 +10,20 @@ describe Game do
   #   expect(valid_game.shuffle_order.first).to_not eql(initial_order.first)
   # end
 
+  it "only accepts an integer as an arguement for player count" do
+    invalid_input = "not an integer"
+    expect(valid_game.valid_player_count?(invalid_input)).to be false
+    valid_input = 3
+    expect(valid_game.valid_player_count?(valid_input)).to be true
+  end
+
+  it "does not accept less than 1 or more than 5 players" do
+    number = 0
+    expect(valid_game.valid_player_count?(number)).to be false
+    number = 6
+    expect(valid_game.valid_player_count?(number)).to be false
+  end
+
   it "checks to see if the hidden word contains the guessed letter" do
     guess = "O"
     word = "WORD"

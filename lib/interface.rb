@@ -3,16 +3,16 @@ class Interface
   attr_accessor :game
 
   def initialize
-    @validator = Validator.new
+    # @validator = Validator.new
     @game = Game.new
-    @player_count = 0
+    # @player_count = 0
   end
 
   def get_player_count
     puts "How many players? (1-5)"
     input = gets.chomp.to_i
-    if @validator.valid_player_count?(input)
-      @player_count = input
+    if @game.valid_player_count?(input)
+      @game.player_count = input
     else
       puts "Thats not a valid number"
       get_player_count
@@ -37,12 +37,12 @@ class Interface
 
   def get_all_names
     i = 1
-    @player_count.times do |player|
+    @game.player_count.times do |player|
       name = get_player_name(i)
       @game.players << name
       i += 1
     end
-    puts "Okay! Let's play!" 
+    puts "Okay! Let's play!"
     @game.shuffle_order
   end
 
@@ -106,6 +106,6 @@ class Interface
       else
         letter_guess(input, player)
       end
-    end    
+    end
   end
 end
