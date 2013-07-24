@@ -1,5 +1,3 @@
-require 'pry'
-
 require "random_word_generator"
 
 class Word
