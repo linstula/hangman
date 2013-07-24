@@ -34,11 +34,9 @@ class Interface
   end
 
   def get_all_names
-    i = 1
-    @game.player_count.times do |player|
+    (1..@game.player_count).each do |i|
       name = get_player_name(i)
       @game.players << name
-      i += 1
     end
     puts "Okay! Let's play!"
     @game.shuffle_order
