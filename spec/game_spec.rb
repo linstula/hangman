@@ -10,6 +10,8 @@ describe Game do
   #   expect(valid_game.shuffle_order.first).to_not eql(initial_order.first)
   # end
 
+  # Player count
+
   it "only accepts an integer as an arguement for player count" do
     invalid_input = "not an integer"
     expect(valid_game.valid_player_count?(invalid_input)).to be false
@@ -23,6 +25,29 @@ describe Game do
     number = 6
     expect(valid_game.valid_player_count?(number)).to be false
   end
+
+  # Player names
+
+  it "does not accept a blank name" do
+    name = ""
+    expect(valid_game.player_name_present?(name)).to be false
+  end
+
+  it "does not accept duplicate names" do
+    name_1 = "Player"
+    name_2 = "Player"
+    players = [name_1]
+    expect(valid_game.unique_player_name?(players, name_2)).to be false
+  end
+
+  it "is case insensitive when validating names" do
+    name_1 = "Player"
+    name_2 = "player"
+    players = [name_1]
+    expect(valid_game.unique_player_name?(players, name_2)).to be false
+  end
+
+  # Letter guesses
 
   it "checks to see if the hidden word contains the guessed letter" do
     guess = "O"

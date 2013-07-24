@@ -17,6 +17,24 @@ class Game
     end
   end
 
+  def player_name_present?(name)
+    if name != ""
+      true
+    else
+      false
+    end
+  end
+
+  def unique_player_name?(player_collection, name)
+    uniqueness = true
+    player_collection.each do |existing_player|
+      if name.downcase == existing_player.downcase
+        uniqueness = false
+      end
+    end
+    uniqueness
+  end
+
   def shuffle_order
     @players.shuffle!
   end
@@ -36,12 +54,4 @@ class Game
       false
     end
   end
-
-  # def check_word_guess(word)
-  #   if word == @word.generated_word
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
 end

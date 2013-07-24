@@ -3,9 +3,7 @@ class Interface
   attr_accessor :game
 
   def initialize
-    # @validator = Validator.new
     @game = Game.new
-    # @player_count = 0
   end
 
   def get_player_count
@@ -22,12 +20,12 @@ class Interface
   def get_player_name(player_number)
     puts "What is Player #{player_number}'s name?"
     name = gets.chomp
-    if @validator.name_present?(name)
-      if @validator.unique_name?(@game.players, name)
+    if @game.player_name_present?(name)
+      if @game.unique_player_name?(@game.players, name)
         return name
       else
         puts "That name has already been taken!"
-        get_player_name
+        get_player_name(player_number)
       end
     else
       puts "Player name can't be blank!"
