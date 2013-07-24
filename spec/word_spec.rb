@@ -13,8 +13,8 @@ describe Word do
   it "creates a hidden version of the word" do
     word = "HELLO"
     valid_word.generated_word = word
-    valid_word.hashify_word
-    valid_word.initialize_hidden_word
+    valid_word.hashed_word = valid_word.hashify_word
+    valid_word.hidden_word = valid_word.initialize_hidden_word
     expect(valid_word.hidden_word).to eql("_____")
   end
 
@@ -22,8 +22,8 @@ describe Word do
     guess = "L"
     word = "HELLO"
     valid_word.generated_word = word
-    valid_word.initialize_hidden_word
-    valid_word.hashify_word
+    valid_word.hashed_word = valid_word.hashify_word
+    valid_word.hidden_word = valid_word.initialize_hidden_word
     expect(valid_word.hidden_word).to eql("_____")
     valid_word.update_hidden_word(guess)
     expect(valid_word.hidden_word).to eql("__LL_")
@@ -32,8 +32,8 @@ describe Word do
   it "recognizes when all letters of the hidden word have been guessed" do
     word = "HELLO"
     valid_word.generated_word = word
-    valid_word.initialize_hidden_word
-    valid_word.hashify_word
+    valid_word.hashed_word = valid_word.hashify_word
+    valid_word.hidden_word = valid_word.initialize_hidden_word
     expect(valid_word.hidden_word).to eql("_____")
 
     valid_word.update_hidden_word("E")
