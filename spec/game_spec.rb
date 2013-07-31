@@ -2,22 +2,9 @@ require_relative '../spec_helper'
 
 describe Game do
 
-  # let(:players)     { ["Player1", "Player2", "Player3", "Player4", "Player5"] }
   let(:valid_game)  { Game.new }
 
-  # it "randomizes the play order" do
-  #   initial_order = players.dup
-  #   expect(valid_game.shuffle_order.first).to_not eql(initial_order.first)
-  # end
-
   # Player count
-
-  it "only accepts an integer as an arguement for player count" do
-    invalid_input = "not an integer"
-    expect(valid_game.valid_player_count?(invalid_input)).to be false
-    valid_input = 3
-    expect(valid_game.valid_player_count?(valid_input)).to be true
-  end
 
   it "does not accept less than 1 or more than 5 players" do
     number = 0
@@ -28,22 +15,23 @@ describe Game do
 
   # Player names
 
-  it "does not accept a blank name" do
+  it "cannot have a player with a blank name" do
     name = ""
     expect(valid_game.player_name_present?(name)).to be false
   end
 
-  it "does not accept duplicate names" do
-    name_1 = "Player"
-    name_2 = "Player"
-    players = [name_1]
-    expect(valid_game.unique_player_name?(players, name_2)).to be false
+  it "cannot have players with duplicate names" do
+    player_1 = Player.new("Name")
+    dup_name = "Name"
+    players = [player_1]
+    expect(valid_game.unique_player_name?(players, dup_name)).to be false
   end
 
-  it "is case insensitive when validating names" do
+  it "is case insensitive when validating uniqueness of names" do
     name_1 = "Player"
     name_2 = "player"
-    players = [name_1]
+    player_1 = Player.new(name_1)
+    players = [player_1]
     expect(valid_game.unique_player_name?(players, name_2)).to be false
   end
 
@@ -53,10 +41,10 @@ describe Game do
     guess = "O"
     word = "WORD"
     valid_game.word.generated_word = word
-    expect(valid_game.check_guess(guess)).to eql true
+    expect(valid_game.letter_guess_match?(guess)).to eql true
 
     guess = "Z"
-    expect(valid_game.check_guess(guess)).to eql false
+    expect(valid_game.letter_guess_match?(guess)).to eql false
   end
 
   it "recognizes when a letter has already been guessed" do
@@ -66,5 +54,4 @@ describe Game do
     valid_game.guessed_letters = guesses_array
     expect(valid_game.already_guessed?(guess_2)).to be true
   end
-
 end
