@@ -1,15 +1,16 @@
 require_relative "lib/game"
 require_relative "lib/word"
+require_relative "lib/player"
 require_relative "lib/interface"
+require_relative "lib/controller"
 
 
-hangman = Interface.new
+hangman = Controller.new
 
-hangman.get_player_count
-hangman.get_all_names
+hangman.setup_game
 
 while true
-  hangman.game.players.each do |player|
-    hangman.take_turn(player)
-  end
+	hangman.game.players.each do |player|
+		hangman.take_turn(player)
+	end
 end
